@@ -18,9 +18,18 @@ if (isset($_GET["artist"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <style>
+    @font-face {
+    font-family: 'Dosis';
+    src: url('Dosis-VariableFont_wght.ttf') format('truetype');
+}
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Dosis';
+}
     #main{
         background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url("./components/home.jpeg");
         height:120vh;
@@ -46,6 +55,14 @@ if (isset($_GET["artist"])) {
         background-color: black;
         color: white;
     }
+    #getData {
+        background-color: transparent;
+        border: 2px solid yellow;
+        border-radius:10px;
+        box-shadow: 0 4px 8px rgba(255, 0, 0, 0.5);
+        color:white;
+        padding:5px 4px;
+    } 
 
 </style>
 
@@ -54,21 +71,20 @@ if (isset($_GET["artist"])) {
         <div id="main">
             <nav class="navbar">
                 <div class="container-fluid mt-3">
-                    <a class="navbar-brand ms-3" style="color:white";>BeatVibe</a>
-                    <form class="d-flex">
-                        <input type="submit" name="logout" value="logout" class="ps-2 pe-2  me-3 mt-2">
-                    </form>
+                    <a class="navbar-brand ms-3 fs-2" style="color:white;">BeatVibe</a>
+                    <button name="logout" value="logout" class="ps-2 pe-2  me-3 mt-2 btn btn-warning" id="logout">Logout</button>
                 </div>
             </nav>
             
             <div class="container text-center">
                 <h2 class="mx-auto mt-5">Where Words Fail, Music Speaks</h2>
-                <form method="GET" action="">
-                    <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" oninput="this.form.submit()">
-                </form>
+                
+                    <input type="search" id="getData" placeholder="  search">
+                    <p id="ele" style="color:white;" ></p>
+        
             </div>
             <div data-bs-theme="dark">
-                <h1 style="text-align:center; color:white; margin-top:100px;" class="mb-5">Choose Your Current MooD</h1>
+                <h1 style="text-align:center; color:white; margin-top:200px;" class="mb-5">Choose Your Current MooD</h1>
                 <div class="container " >
                     <div class="row ">
                         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
@@ -139,8 +155,8 @@ if (isset($_GET["artist"])) {
                         </div>
                     </div>
                     </div>
-                <div style="background-color:black;">
-                    <h1 class=" text-center mt-5 mb-5 " style="color:white">The Trending Music</h1>
+                <div style="background-color:black; margin-top:200px;">
+                    <h1 class=" text-center mt-5 mb-5 " style="color:white;">The Trending Music</h1>
                         <div class="container">
                             <div class="row">
                                 <?php
@@ -210,6 +226,33 @@ if (isset($_GET["artist"])) {
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+    <script>
+        let nid =""
+        $("#getData").keydown("input", function () {
+            var userInput = $(this).val();
+            $.get("search.php", { query: userInput }, function (data) {
+                // console.log(data);
+                data = JSON.parse(data)
+                // console.log(data);
+                for (let i=0;i<3;i++){
+                    nid= data[i].id
+                    console.log(nid);
+                    $("#ele").text(data[i].music)
+                    
+                }
+        });
+    });
+    $("#ele").click(function(){
+        window.location.href = "play.php?id=" +nid
+    })
+    $("#logout").click(function(event){
+        event.preventDefault()
+        if(confirm("Do you want to Leave"))
+        {
+        window.location.href = "index.php"
+        }
+    })
+    
+</script>
 </body>
 </html>

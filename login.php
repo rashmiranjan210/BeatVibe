@@ -14,29 +14,31 @@
         }
         #log{
             background-color:royalblue;
-            /* align-items:strech; */
         }
-        .bg-img{
-            background-image: url("./Images/wp-studio.jpg");
+        body{
+            background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url("./components/bg.jpeg");            
             height:100vh;
             width:100%;
-            background-position:center;
-            background-size:cover;
-            /* position:relative; */
+            /* background-position:center; */
+            /* background-size:cover; */
         }
         .card{
-            background-image: url("./Images/wp-studio.jpg");
-            height:100vh;
             width:100%;
+            /* background-position:center;
+            background-size:cover; */
+            margin-top:30%;
+            backdrop-filter:blur(5px);
+        }
+        .side{
+            background-image: url("./components/bg.jpeg");
             background-position:center;
             background-size:cover;
-            margin-top:25%;
-
         }
     </style>
 </head>
 <body class="bg-img">
     <?php
+    // include_once"head.php";
     if(isset($_POST['login'])){
         require_once "db-connect.php";
         $email = $_POST['email'];
@@ -44,8 +46,7 @@
         $qry = "SELECT * FROM register WHERE email='$email' AND pass='$password'";
         $res = $conn->query($qry);
         if($res->num_rows>0){
-           $sc="login succesfully";
-           header("Location:home.php");
+            header("location:home.php");
         } else {
             // echo $conn->error;
             $msg="Invalid Email or Password.";
@@ -59,10 +60,10 @@
     
     <div >
         <div class="row">
-            <div class="col-md-3 mx-auto ">
-                <div class="card bg-transparent shadow-lg border border-1 border-dark">
+            <div class="col-md-6 mx-auto d-flex">
+                <div class="card bg-transparent shadow-lg border border-1 border-dark ">
                     <div class="card-header">
-                        <h2 class="text-light">Login Here</h2>
+                        <h2 class="text-light mt-5">Login Here</h2>
                     </div>
                     <div class="card-body text-light">
                         <?php
@@ -70,6 +71,14 @@
                             ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <?php echo $msg; ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php
+                        }
+                        if(isset($sc)){
+                            ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo $sc; ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             <?php
@@ -83,11 +92,14 @@
                         <input type="checkbox" name="remember" >  Remember me<br>
                         <input type="submit" value="Login" class="btn btn-primary mt-3"  name="login" id="log"><br>
                         <label>Don't have an account?
-                            <a href="register.php" value="signup now"name="register">SignUp Now</a>
+                            <a href="register.php" value="signup now"name="register" >SignUp Now</a>
                         <!-- <input type="submit" value="SignUp now" class="btn btn-light mt-3" name="register"> -->
                         </label>
                         </form>
                     </div>
+                </div>
+                <div class=" side card shadow-lg border border-1 border-dark ">
+                    
                 </div>
             </div>
         </div>

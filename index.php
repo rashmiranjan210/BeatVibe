@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 <style>
+    @font-face {
+    font-family: 'Dosis';
+    src: url('Dosis-VariableFont_wght.ttf') format('truetype');
+}
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Dosis';
+}
     #main{
         background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url("./components/bg.jpeg");
         height:90vh;
@@ -37,9 +46,9 @@
 <!-- navbar -->
             <nav class="navbar">
             <div class="container-fluid mt-3">
-                <a class="navbar-brand ms-3" style="color:white";>BeatVibe</a>
+                <a class="navbar-brand ms-3 fs-2" style="color:white";>BeatVibe</a>
                 <form class="d-flex">
-                    <input type="submit" name="login" value="login" class="ps-2 pe-2  me-3 mt-2">
+                 <a href="login.php"><button type="button" class="btn btn-warning">Login</button></a>   
                 </form>
             </div>
             </nav>
@@ -49,7 +58,7 @@
                     <div class="col" id="font1">
                     Infinite Harmony Awaits
                     </div>
-                    <div style="color:white" class="mb-5">
+                    <div style="color:white" class="mb-5 fs-5 text-warning">
                     Your Personal Sound Sanctuary
                     </div>
                     <div class="mt-5">

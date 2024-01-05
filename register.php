@@ -7,14 +7,14 @@
     <title>REGISTER</title>
     <style>
         .bg-img{
-            background-image: url("./Images/wp-studio.jpg");
+            background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url("./components/bg.jpeg");
             height:100vh;
             width:100%;
-            background-position:center;
-            background-size:cover;
+            /* background-position:center;
+            background-size:cover; */
         }
         .card{
-            background-image: url("./Images/wp-studio.jpg");
+            background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url("./components/bg.jpeg");
             /* height:100vh; */
             width:100%;
             background-position:center;
